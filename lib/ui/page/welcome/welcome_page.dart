@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hackathon_2023/gen/assets.gen.dart';
-import 'package:flutter_hackathon_2023/ui/sign_in/sign_in_page.dart';
+import 'package:flutter_hackathon_2023/ui/page/sign_in/sign_in_page.dart';
 import 'package:flutter_hackathon_2023/ui/theme/app_theme.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';

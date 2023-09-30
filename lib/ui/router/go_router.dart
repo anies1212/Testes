@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hackathon_2023/ui/sign_in/sign_in_page.dart';
-import 'package:flutter_hackathon_2023/ui/welcome/welcome_page.dart';
+import 'package:flutter_hackathon_2023/ui/page/sign_in/sign_in_page.dart';
+import 'package:flutter_hackathon_2023/ui/page/welcome/welcome_page.dart';
 import 'package:go_router/go_router.dart';
 
 // アプリ起動時のパス
