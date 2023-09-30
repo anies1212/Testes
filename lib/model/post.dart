@@ -13,6 +13,8 @@ class PostModel with _$PostModel {
   factory PostModel({
     @JsonKey(name: 'id') required int id,
     @JsonKey(name: 'name') required String name,
+    @JsonKey(name: 'title') required String title,
+    @JsonKey(name: 'description') required String description,
     @JsonKey(name: 'image_url') required String imageUrl,
     @JsonKey(name: 'audio_url') required String audioUrl,
     @JsonKey(name: 'created_at') required DateTime createdAt,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hackathon_2023/ui/page/record/connected_record_page.dart';
-import 'package:flutter_hackathon_2023/ui/page/welcome/welcome_page.dart';
-import 'package:flutter_hackathon_2023/ui/timeline/connected_timeline_page.dart';
+import 'package:flutter_hackathon_2023/ui/page/timeline/connected_timeline_page.dart';
 import 'package:go_router/go_router.dart';
 
 // アプリ起動時のパス
@@ -16,7 +15,7 @@ final goRouter = GoRouter(
       path: _initialLocation,
       pageBuilder: (context, state) {
         return const MaterialPage(
-          child: WelcomePage(),
+          child: ConnectedTimelinePage(),
         );
       },
       routes: [
