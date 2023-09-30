@@ -19,7 +19,7 @@ class ConnectedTimelinePage extends HookConsumerWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.orange,
-        onPressed: () => context.goNamed(ConnectedRecordPage.routePath),
+        onPressed: () => context.push(ConnectedRecordPage.routePath),
         child: const Icon(
           Icons.add,
           color: Colors.white,
