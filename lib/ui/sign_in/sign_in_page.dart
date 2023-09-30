@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hackathon_2023/ui/timeline/timeline_item.dart';
+import 'package:flutter_hackathon_2023/ui/theme/app_theme.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SignInPageParams {
@@ -24,12 +24,17 @@ class SignInPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = ref.watch(appThemeProvider);
+
     return Scaffold(
       appBar: AppBar(),
-      body: const Column(
-        children: [
-          TimelineItem(),
-        ],
+      body: Center(
+        child: Text(
+          'This is Our Sign In Page\n ${param.userName}, ${param.userId}',
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: Colors.black,
+          ),
+        ),
       ),
     );
   }
