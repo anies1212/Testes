@@ -23,7 +23,7 @@ class UserServiceImpl implements UserService {
   final UserIdRepository _userIdRepository;
 
   @override
-  Future<UserModel> getUser(String id) {
+  Future<UserModel> getUser(int id) {
     return _userRepository.findById(id);
   }
 
