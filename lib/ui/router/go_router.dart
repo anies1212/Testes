@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hackathon_2023/ui/page/record/connected_record_page.dart';
-import 'package:flutter_hackathon_2023/ui/page/sign_in/sign_in_page.dart';
 import 'package:flutter_hackathon_2023/ui/page/welcome/welcome_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -30,21 +29,6 @@ final goRouter = GoRouter(
           },
         ),
       ],
-    ),
-    // ex) アカウント画面
-    GoRoute(
-      name: SignInPage.routePath,
-      path: SignInPage.routePath,
-      pageBuilder: (context, state) {
-        final param = state.extra as SignInPageParams;
-
-        return MaterialPage(
-          key: state.pageKey,
-          child: SignInPage(
-            param: param,
-          ),
-        );
-      },
     ),
   ],
   // 遷移ページがないなどのエラーが発生した時に、このページに行く

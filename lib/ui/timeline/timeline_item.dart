@@ -6,6 +6,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class TimelineItem extends HookConsumerWidget {
   const TimelineItem({super.key});
 
+  static const double _imageSquareWidth = 88;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
@@ -17,14 +19,16 @@ class TimelineItem extends HookConsumerWidget {
       child: Row(
         children: [
           const Gap(13),
-          CircleAvatar(
-            radius: 50,
-            backgroundColor: Colors.transparent,
-            child: ClipOval(
-              child: Image.network(
-                'https://cdn.pixabay.com/photo/2013/07/18/15/07/hummingbird-164632__340.jpg',
-                fit: BoxFit.cover,
-              ),
+          Container(
+            clipBehavior: Clip.antiAlias,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+            ),
+            width: _imageSquareWidth,
+            height: _imageSquareWidth,
+            child: Image.network(
+              'https://cdn.pixabay.com/photo/2013/07/18/15/07/hummingbird-164632__340.jpg',
+              fit: BoxFit.cover,
             ),
           ),
           Expanded(
