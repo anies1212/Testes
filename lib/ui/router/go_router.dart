@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hackathon_2023/ui/page/record/connected_record_page.dart';
 import 'package:flutter_hackathon_2023/ui/page/sign_in/sign_in_page.dart';
 import 'package:flutter_hackathon_2023/ui/page/welcome/welcome_page.dart';
 import 'package:go_router/go_router.dart';
@@ -18,6 +19,17 @@ final goRouter = GoRouter(
           child: WelcomePage(),
         );
       },
+      routes: [
+        GoRoute(
+          name: ConnectedRecordPage.routePath,
+          path: ConnectedRecordPage.routePath,
+          pageBuilder: (context, state) {
+            return const MaterialPage(
+              child: ConnectedRecordPage(),
+            );
+          },
+        ),
+      ],
     ),
     // ex) アカウント画面
     GoRoute(
