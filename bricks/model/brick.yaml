@@ -1,0 +1,18 @@
+name: model
+description: Generate freezed model file
+
+version: 0.1.0+1
+
+environment:
+  mason: ">=0.1.0-dev.41 <0.1.0"
+
+vars:
+  name:
+    type: string
+    description: Model name
+    prompt: What is model name?
+  path:
+    type: string
+    description: Output path in lib/model/
+    default: ./
+    prompt: Where to output?

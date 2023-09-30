@@ -1,0 +1,27 @@
+targets:
+  $default:
+    # add $package$ and pubspec.yaml for flutter_gen bug
+    # https://pub.dev/packages/flutter_gen#issues
+    sources:
+      - $package$
+      - lib/**
+      - test/**
+      - pubspec.yaml
+    builders:
+      freezed:
+        generate_for:
+          include:
+            - lib/model/**.dart
+      json_serializable:
+        generate_for:
+          # exclude everything to avoid conflicts, this library uses a custom builder
+          include:
+          exclude:
+            - $package$
+            - lib/**
+            - test/**
+            - pubspec.yaml
+      json_serializable_immutable_collections:
+        generate_for:
+          include:
+            - lib/model/**.dart
