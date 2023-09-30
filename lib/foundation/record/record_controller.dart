@@ -23,7 +23,6 @@ class RecordController extends ValueNotifier<RecordValue> {
     if (hasPermission) {
       await record.start();
       final isRecording = await _isRecording();
-      print('スタートした $isRecording');
       value = RecordValue(isRecording: isRecording);
     }
   }
@@ -31,7 +30,6 @@ class RecordController extends ValueNotifier<RecordValue> {
   Future<String?> stopRecording() async {
     final path = await record.stop();
     final isRecording = await _isRecording();
-    print('ストップした $isRecording');
     value = RecordValue(isRecording: isRecording);
     return path;
   }
