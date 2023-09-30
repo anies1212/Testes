@@ -1,6 +1,7 @@
 import 'package:flutter_hackathon_2023/foundation/unit.dart';
 import 'package:flutter_hackathon_2023/service/audio/audio_service.dart';
 import 'package:flutter_hackathon_2023/service/audio/audio_service_impl.dart';
+import 'package:flutter_hackathon_2023/state/state_notifier_async.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final uploadAudioStateProvider =
@@ -27,17 +28,5 @@ class UploadAudioState extends StateNotifier<AsyncValue<Unit?>>
       await _audioService.upload(localFilePath: localFilePath);
       return unit;
     });
-  }
-}
-
-mixin StateNotifierAsyncMixin<T> on StateNotifier<AsyncValue<T>> {
-  Future<void> handleAsync(Future<T> Function() future) async {
-    try {
-      state = const AsyncValue.loading();
-      final result = await future();
-      state = AsyncValue.data(result);
-    } catch (e, s) {
-      state = AsyncValue.error(e, s);
-    }
   }
 }
