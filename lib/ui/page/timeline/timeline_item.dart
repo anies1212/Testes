@@ -1,9 +1,15 @@
 import 'package:decorated_icon/decorated_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hackathon_2023/model/post.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class TimelineItem extends HookConsumerWidget {
-  const TimelineItem({super.key});
+  const TimelineItem({
+    super.key,
+    required this.post,
+  });
+
+  final PostModel post;
 
   static const double _imageSquareWidth = 88;
 
@@ -12,27 +18,29 @@ class TimelineItem extends HookConsumerWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Sep, Sat 30 | 00:11',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w200,
-                fontSize: 24,
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${post.createdAt.month}, ${post.createdAt.weekday} ${post.createdAt.day} | 00:11',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w200,
+                  fontSize: 24,
+                ),
               ),
-            ),
-            Text(
-              'Track 1',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w900,
-                fontSize: 36,
+              Text(
+                post.title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 28,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         Stack(
           alignment: Alignment.center,

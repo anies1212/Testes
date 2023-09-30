@@ -1,3 +1,4 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter_hackathon_2023/model/post.dart';
 import 'package:flutter_hackathon_2023/repository/post/post_repository.dart';
 import 'package:flutter_hackathon_2023/repository/post/post_repository_impl.dart';
@@ -14,7 +15,7 @@ class PostServiceImpl implements PostService {
   final PostRepository _repository;
 
   @override
-  Stream<List<PostModel>> watchPosts() {
+  Stream<BuiltList<PostModel>> watchPosts() {
     return _repository.watchAll();
   }
 }

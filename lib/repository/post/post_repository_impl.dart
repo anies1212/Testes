@@ -1,3 +1,4 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter_hackathon_2023/foundation/supabase/supabase_client.dart';
 import 'package:flutter_hackathon_2023/model/post.dart';
 import 'package:flutter_hackathon_2023/repository/post/post_repository.dart';
@@ -16,7 +17,7 @@ class PostRepositoryImpl implements PostRepository {
   final SupabaseClient _client;
 
   @override
-  Stream<List<PostModel>> watchAll() {
+  Stream<BuiltList<PostModel>> watchAll() {
     return _client
         .from(_tableName)
         .stream(primaryKey: ['id'])
@@ -26,7 +27,7 @@ class PostRepositoryImpl implements PostRepository {
               .map(
                 (e) => PostModel.fromJson(e),
               )
-              .toList(),
+              .toBuiltList(),
         );
   }
 }
