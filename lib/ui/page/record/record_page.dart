@@ -51,7 +51,7 @@ class RecordPage extends HookConsumerWidget {
           ),
           child: TimelineItem(post: PostModel.defaultInstance),
         ),
-        const Gap(200),
+        const Spacer(),
         Text(
           durationStr.value.toString(),
           style: const TextStyle(
@@ -60,7 +60,7 @@ class RecordPage extends HookConsumerWidget {
             fontSize: 100,
           ),
         ),
-        const Gap(160),
+        const Spacer(),
         Container(
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
@@ -85,10 +85,12 @@ class RecordPage extends HookConsumerWidget {
             ),
           ),
         ),
+        const Gap(16),
         OutlinedButton(
           onPressed: () => onUploadPressed(pathState.value),
           child: const Text('アップロード'),
-        )
+        ),
+        const Gap(16),
       ],
     );
   }

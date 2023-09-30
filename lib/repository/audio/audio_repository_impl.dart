@@ -17,11 +17,11 @@ class AudioRepositoryImpl implements AudioRepository {
   final SupabaseClient _supabaseClient;
 
   @override
-  Future<void> upload({
+  Future<String> upload({
     required int userId,
     required String localFilePath,
   }) async {
-    await _supabaseClient.storage.from('recorded_audio').upload(
+    return await _supabaseClient.storage.from('recorded_audio').upload(
           '$userId/${DateTime.now().toString()}.m4a',
           File(localFilePath),
         );

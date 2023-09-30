@@ -1,4 +1,5 @@
 import 'package:built_collection/built_collection.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_hackathon_2023/foundation/supabase/supabase_client.dart';
 import 'package:flutter_hackathon_2023/model/post.dart';
 import 'package:flutter_hackathon_2023/repository/post/post_repository.dart';
@@ -29,5 +30,27 @@ class PostRepositoryImpl implements PostRepository {
               )
               .toBuiltList(),
         );
+  }
+
+  @override
+  Future<PostModel> create({
+    required String name,
+    required String imageUrl,
+    required String audioUrl,
+  }) async {
+    final bearerToken = dotenv.get('SUPABASE_BEARER_TOKEN');
+
+    final result = await _client.functions.invoke(
+      'create_post',
+      body: {
+        'name': name,
+        'image_url': imageUrl,
+        'audio_url': audioUrl,
+      },
+      headers: {'Authorization': 'Bearer $bearerToken'},
+    );
+    return PostModel.fromJson(
+      result.data as Map<String, dynamic>,
+    );
   }
 }
