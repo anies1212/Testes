@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hackathon_2023/state/audio_post/upload_audio_post.dart';
 import 'package:flutter_hackathon_2023/ui/page/app_background_container.dart';
 import 'package:flutter_hackathon_2023/ui/page/record/record_page.dart';
+import 'package:flutter_hackathon_2023/ui/page/upload_completed/upload_completed_page.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ConnectedRecordPage extends HookConsumerWidget {
@@ -25,7 +27,12 @@ class ConnectedRecordPage extends HookConsumerWidget {
           Future.microtask(
               () => ScaffoldMessenger.of(context).showSnackBar(snackBar));
 
-          // TODO(nakabachi): v is PostModel dayon
+          Future.microtask(() {
+            context.push(
+              UploadCompletedPage.routePath,
+              extra: v.toJson(),
+            );
+          });
         }
       },
       error: (e, s) {
