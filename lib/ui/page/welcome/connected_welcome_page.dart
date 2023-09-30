@@ -11,6 +11,10 @@ class ConnectedWelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: AppBackgroundContainer(
+        colors: [
+          Colors.purple,
+          Colors.orange,
+        ],
         child: WelcomePage(),
       ),
     );
