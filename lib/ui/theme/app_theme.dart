@@ -3,11 +3,21 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final appThemeProvider = Provider<ThemeData>(
   (ref) {
-    return ThemeData.light().copyWith(
-        textTheme: const TextTheme(
-      displayLarge: TextStyle(fontSize: 1000),
-      displayMedium: TextStyle(fontSize: 24),
-      displaySmall: TextStyle(fontSize: 12),
-    ));
+    return ThemeData(
+      textTheme: const TextTheme(
+        displayLarge: TextStyle(
+          fontSize: 48,
+          fontWeight: FontWeight.w600,
+        ),
+        displayMedium: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.w400,
+        ),
+        displaySmall: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w200,
+        ),
+      ),
+    );
   },
 );
