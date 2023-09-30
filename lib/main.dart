@@ -1,24 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hackathon_2023/ui/router/go_router.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_hackathon_2023/foundation/supabase/setup.dart';
+import 'package:flutter_hackathon_2023/ui/app.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-class MyApp extends HookConsumerWidget {
-  const MyApp({super.key});
+  await dotenv.load(fileName: '.env');
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return ProviderScope(
-      child: MaterialApp.router(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        routerConfig: goRouter,
-      ),
-    );
-  }
+  await setupSupabase();
+  runApp(const App());
 }
