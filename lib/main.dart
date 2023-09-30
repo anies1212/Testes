@@ -16,8 +16,10 @@ Future<void> main() async {
       await ProviderContainer().read(userIdServiceProvider).getUserId();
 
   runApp(
-    App(
-      userId: userId,
+    ProviderScope(
+      child: App(
+        userId: userId,
+      ),
     ),
   );
 }
