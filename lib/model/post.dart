@@ -1,17 +1,21 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'post.freezed.dart';
+
+part 'post.g.dart';
 
 @freezed
 class PostModel with _$PostModel {
   const PostModel._();
 
   factory PostModel({
-    required int id,
-    required String name,
-    required String imageUrl,
-    required String audioUrl,
-    required DateTime createdAt,
+    @JsonKey(name: 'id') required int id,
+    @JsonKey(name: 'name') required String name,
+    @JsonKey(name: 'image_url') required String imageUrl,
+    @JsonKey(name: 'audio_url') required String audioUrl,
+    @JsonKey(name: 'created_at') required DateTime createdAt,
   }) = _PostModel;
 
   factory PostModel.fromJson(Map<String, dynamic> json) =>
