@@ -5,4 +5,12 @@ interface class PostRepository {
   Stream<BuiltList<PostModel>> watchAll() {
     throw UnimplementedError();
   }
+
+  Future<PostModel> create({
+    required String name,
+    required String imageUrl,
+    required String audioUrl,
+  }) {
+    throw UnimplementedError();
+  }
 }

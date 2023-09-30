@@ -1,5 +1,5 @@
 interface class AudioRepository {
-  Future<void> upload({
+  Future<String> upload({
     required int userId,
     required String localFilePath,
   }) {

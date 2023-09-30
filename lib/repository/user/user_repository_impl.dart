@@ -17,12 +17,14 @@ class UserRepositoryImpl implements UserRepository {
   final SupabaseClient _client;
 
   @override
-  Future<UserModel> findById(String id) {
-    return _client.from(_tableName).select().eq('id', id).then(
-          (value) => UserModel.fromJson(
-            value as Map<String, dynamic>,
-          ),
+  Future<UserModel> findById(int id) async {
+    final results = await _client.from(_tableName).select().eq('id', id).then(
+          (value) => value as List<dynamic>,
         );
+
+    return UserModel.fromJson(
+      results[0] as Map<String, dynamic>,
+    );
   }
 
   @override
