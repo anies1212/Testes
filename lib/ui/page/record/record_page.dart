@@ -8,7 +8,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class RecordPage extends HookConsumerWidget {
-  const RecordPage({super.key});
+  const RecordPage({
+    super.key,
+    required this.onUploadPressed,
+  });
+
+  final ValueChanged<String?> onUploadPressed;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -77,6 +82,10 @@ class RecordPage extends HookConsumerWidget {
             ),
           ),
         ),
+        OutlinedButton(
+          onPressed: () => onUploadPressed(pathState.value),
+          child: const Text('アップロード'),
+        )
       ],
     );
   }
