@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hackathon_2023/ui/page/app_background_container.dart';
 import 'package:flutter_hackathon_2023/ui/page/record/record_page.dart';
 
 class ConnectedRecordPage extends StatelessWidget {
@@ -10,9 +11,17 @@ class ConnectedRecordPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Record'),
+        backgroundColor: Colors.purple,
+        automaticallyImplyLeading: false,
+        elevation: 0,
       ),
-      body: const RecordPage(),
+      body: const AppBackgroundContainer(
+        colors: [
+          Colors.purple,
+          Colors.orange,
+        ],
+        child: RecordPage(),
+      ),
     );
   }
 }

@@ -17,6 +17,10 @@ class ConnectedTimelinePage extends HookConsumerWidget {
         elevation: 0,
       ),
       body: const AppBackgroundContainer(
+        colors: [
+          Colors.orange,
+          Colors.pink,
+        ],
         child: TimelinePage(),
       ),
     );
