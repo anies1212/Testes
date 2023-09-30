@@ -3,7 +3,12 @@ import 'package:flutter_hackathon_2023/ui/router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class App extends HookConsumerWidget {
-  const App({super.key});
+  const App({
+    super.key,
+    required this.userId,
+  });
+
+  final int? userId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -13,7 +18,7 @@ class App extends HookConsumerWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        routerConfig: goRouter,
+        routerConfig: createGoRouter(userId),
       ),
     );
   }

@@ -15,4 +15,3 @@ targets:
       json_serializable_immutable_collections:
         generate_for:
           include:
-            - lib/model/**.dart

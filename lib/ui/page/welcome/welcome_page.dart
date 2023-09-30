@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hackathon_2023/gen/assets.gen.dart';
-import 'package:flutter_hackathon_2023/ui/page/record/connected_record_page.dart';
-import 'package:flutter_hackathon_2023/ui/theme/app_theme.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_hackathon_2023/state/user/create_user_state.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -10,34 +8,46 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class WelcomePage extends HookConsumerWidget {
   const WelcomePage({super.key});
 
-  static const routePath = '/welcome';
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(appThemeProvider);
+    final textEditingController = useTextEditingController();
 
-    return Scaffold(
-      appBar: AppBar(),
-      body: Center(
+    ref.listen(createUserProvider.select((id) => id != null), (_, id) {
+      context.push('/timeline');
+    });
+
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              'Welcome to Our App',
-              style: theme.textTheme.bodyLarge?.copyWith(
-                color: Colors.red,
+            const Text(
+              'Welcome',
+              style: TextStyle(
+                fontSize: 36,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const Gap(20),
-            SvgPicture.asset(
-              Assets.lib.assets.image.deathNoteL,
-              height: 500,
+            const Gap(12),
+            TextFormField(
+              onChanged: (value) {
+                textEditingController.text = value;
+              },
+              controller: textEditingController,
+              maxLength: 20,
+            ),
+            const Gap(12),
+            ElevatedButton(
+              onPressed: () {
+                ref
+                    .read(createUserProvider.notifier)
+                    .createUser(textEditingController.text);
+              },
+              child: const Text('OK'),
             ),
           ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => context.goNamed(
-          ConnectedRecordPage.routePath,
         ),
       ),
     );

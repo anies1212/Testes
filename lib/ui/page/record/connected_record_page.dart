@@ -7,7 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class ConnectedRecordPage extends HookConsumerWidget {
   const ConnectedRecordPage({super.key});
 
-  static const routePath = 'record';
+  static const routePath = '/record';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

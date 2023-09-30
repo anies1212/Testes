@@ -10,7 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class ConnectedTimelinePage extends HookConsumerWidget {
   const ConnectedTimelinePage({super.key});
 
-  static const routePath = 'timeline';
+  static const routePath = '/timeline';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
