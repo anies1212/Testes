@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hackathon_2023/ui/page/record/connected_record_page.dart';
+import 'package:flutter_hackathon_2023/ui/page/timeline/connected_timeline_page.dart';
 import 'package:flutter_hackathon_2023/ui/page/welcome/connected_welcome_page.dart';
-import 'package:flutter_hackathon_2023/ui/page/welcome/welcome_page.dart';
-import 'package:flutter_hackathon_2023/ui/timeline/connected_timeline_page.dart';
 import 'package:go_router/go_router.dart';
 
 GoRouter createGoRouter(int? userId) {
-  final router = GoRouter(
+  return GoRouter(
     // アプリが起動した時
     initialLocation: userId == null
         ? ConnectedWelcomePage.routePath
@@ -48,6 +47,4 @@ GoRouter createGoRouter(int? userId) {
       ),
     ),
   );
-
-  return router;
 }

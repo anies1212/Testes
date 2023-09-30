@@ -5,7 +5,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class RecordPage extends HookConsumerWidget {
-  const RecordPage({super.key});
+  const RecordPage({
+    super.key,
+    required this.onUploadPressed,
+  });
+
+  final ValueChanged<String?> onUploadPressed;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -53,6 +58,10 @@ class RecordPage extends HookConsumerWidget {
           },
           icon: const Icon(Icons.stop),
         ),
+        OutlinedButton(
+          onPressed: () => onUploadPressed(pathState.value),
+          child: const Text('アップロード'),
+        )
       ],
     );
   }
