@@ -45,6 +45,9 @@ dependencies:
   built_collection: 5.1.1
   dartx: 1.2.0
 
+  # For Audio
+  audioplayers: 5.1.0
+
   # For Environment variables
   flutter_dotenv: ^5.1.0
 
