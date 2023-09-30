@@ -17,6 +17,11 @@ class PostModel with _$PostModel {
     @JsonKey(name: 'description') required String description,
     @JsonKey(name: 'image_url') required String imageUrl,
     @JsonKey(name: 'audio_url') required String audioUrl,
+    @JsonKey(name: 'jacket_url') required String jacketUrl,
+    @JsonKey(name: 'score') required int score,
+    @JsonKey(name: 'accuracy') required int accuracy,
+    @JsonKey(name: 'unique') required int unique,
+    @JsonKey(name: 'like_test') required int likeTest,
     @JsonKey(name: 'created_at') required DateTime createdAt,
   }) = _PostModel;
 
@@ -30,6 +35,11 @@ class PostModel with _$PostModel {
     description: '',
     audioUrl: '',
     imageUrl: '',
+    jacketUrl: '',
+    score: 0,
+    accuracy: 0,
+    unique: 0,
+    likeTest: 0,
     createdAt: DateTime.timestamp(),
   );
 }
