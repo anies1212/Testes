@@ -22,4 +22,14 @@ class PostModel with _$PostModel {
 
   factory PostModel.fromJson(Map<String, dynamic> json) =>
       _$PostModelFromJson(json);
+
+  static final defaultInstance = PostModel(
+    id: 0,
+    name: '',
+    title: '',
+    description: '',
+    audioUrl: '',
+    imageUrl: '',
+    createdAt: DateTime.timestamp(),
+  );
 }

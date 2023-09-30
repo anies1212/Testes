@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hackathon_2023/foundation/record/record_controller.dart';
+import 'package:flutter_hackathon_2023/model/post.dart';
 import 'package:flutter_hackathon_2023/ui/hook/use_effect_once.dart';
-import 'package:flutter_hackathon_2023/ui/timeline/timeline_item.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
+
+import '../timeline/timeline_item.dart';
 
 class RecordPage extends HookConsumerWidget {
   const RecordPage({
@@ -43,11 +45,12 @@ class RecordPage extends HookConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 24,
-            ),
-            child: TimelineItem()),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 24,
+          ),
+          child: TimelineItem(post: PostModel.defaultInstance),
+        ),
         const Gap(200),
         Text(
           durationStr.value.toString(),
