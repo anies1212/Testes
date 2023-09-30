@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hackathon_2023/foundation/record/record_controller.dart';
+import 'package:flutter_hackathon_2023/model/post.dart';
 import 'package:flutter_hackathon_2023/ui/hook/use_effect_once.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
+
+import '../timeline/timeline_item.dart';
 
 class RecordPage extends HookConsumerWidget {
   const RecordPage({
@@ -17,46 +22,68 @@ class RecordPage extends HookConsumerWidget {
     final controller = useRecordController();
     final pathState = useState<String?>(null);
     final isRecording = useState(false);
+    final durationStr = useState('00.00');
+    final stopWatch = StopWatchTimer(onChange: (sec) {
+      durationStr.value = StopWatchTimer.getDisplayTime(
+        sec,
+        second: true,
+        hours: false,
+        minute: false,
+      );
+    });
 
     // ignore: body_might_complete_normally_nullable
     useEffectOnce(() {
       controller.addListener(() {
         isRecording.value = controller.value.isRecording;
+        isRecording.value ? stopWatch.onStartTimer() : stopWatch.onStopTimer();
       });
-
       return () => controller.dispose();
     });
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text('保存パス: ${pathState.value}'),
-        Row(
-          children: [
-            const Text(
-              '録音中',
-            ),
-            Container(
-              height: 24,
-              width: 24,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: isRecording.value ? Colors.red : Colors.grey,
-              ),
-            ),
-          ],
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 24,
+          ),
+          child: TimelineItem(post: PostModel.defaultInstance),
         ),
-        IconButton(
-          onPressed: controller.startRecording,
-          icon: const Icon(Icons.play_arrow),
+        const Gap(200),
+        Text(
+          durationStr.value.toString(),
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w900,
+            fontSize: 100,
+          ),
         ),
-        IconButton(
-          onPressed: () async {
-            final path = await controller.stopRecording();
-            pathState.value = path;
-          },
-          icon: const Icon(Icons.stop),
+        const Gap(160),
+        Container(
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.pink,
+          ),
+          child: IconButton(
+            color: Colors.pink,
+            iconSize: 100,
+            alignment: Alignment.center,
+            onPressed: () async {
+              if (isRecording.value) {
+                final path = await controller.stopRecording();
+                pathState.value = path;
+              } else {
+                await controller.startRecording();
+              }
+            },
+            icon: Icon(
+              isRecording.value ? Icons.stop : Icons.mic,
+              size: 80,
+              color: Colors.white,
+            ),
+          ),
         ),
         OutlinedButton(
           onPressed: () => onUploadPressed(pathState.value),

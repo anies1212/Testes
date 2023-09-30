@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hackathon_2023/ui/page/app_background_container.dart';
 import 'package:flutter_hackathon_2023/state/audio/upload_audio.dart';
 import 'package:flutter_hackathon_2023/ui/page/record/record_page.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -39,23 +40,31 @@ class ConnectedRecordPage extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Record'),
+        backgroundColor: Colors.purple,
+        automaticallyImplyLeading: false,
+        elevation: 0,
       ),
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          RecordPage(
-            onUploadPressed: (path) {
-              if (path == null) {
-                return;
-              }
-              ref.read(uploadAudioStateProvider.notifier).upload(
-                    localFilePath: path,
-                  );
-            },
-          ),
-          if (loading.value) const CircularProgressIndicator()
+      body: AppBackgroundContainer(
+        colors: const [
+          Colors.purple,
+          Colors.orange,
         ],
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            RecordPage(
+              onUploadPressed: (path) {
+                if (path == null) {
+                  return;
+                }
+                ref.read(uploadAudioStateProvider.notifier).upload(
+                      localFilePath: path,
+                    );
+              },
+            ),
+            if (loading.value) const CircularProgressIndicator()
+          ],
+        ),
       ),
     );
   }
