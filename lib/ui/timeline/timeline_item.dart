@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hackathon_2023/ui/theme/app_theme.dart';
 import 'package:gap/gap.dart';
