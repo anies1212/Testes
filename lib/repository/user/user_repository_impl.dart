@@ -1,3 +1,4 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_hackathon_2023/foundation/supabase/supabase_client.dart';
 import 'package:flutter_hackathon_2023/model/user.dart';
 import 'package:flutter_hackathon_2023/repository/user/user_repository.dart';
@@ -17,7 +18,6 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<UserModel> findById(String id) {
-    // Don't run this.
     return _client.from(_tableName).select().eq('id', id).then(
           (value) => UserModel.fromJson(
             value as Map<String, dynamic>,
@@ -26,12 +26,16 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<List<UserModel>> findAll() {
-    throw UnimplementedError();
-  }
+  Future<int> create(String name) async {
+    final bearerToken = dotenv.get('SUPABASE_BEARER_TOKEN');
 
-  @override
-  Future<void> save(UserModel user) {
-    throw UnimplementedError();
+    final result = await _client.functions.invoke(
+      'create_user',
+      body: {'name': name},
+      headers: {'Authorization': 'Bearer $bearerToken'},
+    );
+    return UserModel.fromJson(
+      result.data as Map<String, dynamic>,
+    ).id;
   }
 }
