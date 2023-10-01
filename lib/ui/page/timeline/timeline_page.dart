@@ -1,5 +1,4 @@
 import 'package:built_collection/built_collection.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hackathon_2023/model/post.dart';
 import 'package:flutter_hackathon_2023/ui/page/timeline/timeline_item.dart';
