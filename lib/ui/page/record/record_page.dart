@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hackathon_2023/foundation/record/record_controller.dart';
 import 'package:flutter_hackathon_2023/model/post.dart';
 import 'package:flutter_hackathon_2023/ui/hook/use_effect_once.dart';
+import 'package:flutter_hackathon_2023/ui/page/record/zig_zag_painter.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
@@ -19,6 +20,7 @@ class RecordPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = useRecordController();
+    final currentAmplitude = useState<double>(0);
     final pathState = useState<String?>(null);
     final isRecording = useState(false);
     final durationStr = useState('00.00');
@@ -38,16 +40,15 @@ class RecordPage extends HookConsumerWidget {
     );
     final progressState = useState<double>(0);
 
-    // ignore: body_might_complete_normally_nullable
     useEffectOnce(() {
-      controller.addListener(() {
+      controller.addListener(() async {
         isRecording.value = controller.value.isRecording;
         isRecording.value ? stopWatch.onStartTimer() : stopWatch.onStopTimer();
+        currentAmplitude.value = await controller.getAmplitude();
       });
       return () => controller.dispose();
     });
 
-    // ignore: body_might_complete_normally_nullable
     useEffectOnce(() {
       animationController.addListener(() {
         progressState.value = animationController.value;
@@ -86,6 +87,14 @@ class RecordPage extends HookConsumerWidget {
                     strokeWidth: 10,
                   ),
                 ),
+                if (currentAmplitude.value != 0)
+                  SizedBox(
+                    width: size.width,
+                    height: 600,
+                    child: CustomPaint(
+                      painter: ZigZagPainter(currentAmplitude.value),
+                    ),
+                  ),
               ],
             ),
           ),
