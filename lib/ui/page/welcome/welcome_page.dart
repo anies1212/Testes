@@ -72,6 +72,7 @@ class WelcomePage extends HookConsumerWidget {
                       ),
                     ),
                     onPressed: () {
+                      FocusScope.of(context).unfocus();
                       ref
                           .read(createUserProvider.notifier)
                           .createUser(textEditingController.text);
