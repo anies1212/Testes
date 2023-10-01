@@ -1,4 +1,3 @@
-import 'dart:html';
 import 'dart:math';
 
 import 'package:audioplayers/audioplayers.dart';
@@ -20,7 +19,7 @@ class RecordPage extends HookConsumerWidget {
     required this.onUploadPressed,
   });
 
-  final PostModel profile;
+  final PostModel? profile;
   final ValueChanged<String?> onUploadPressed;
 
   @override

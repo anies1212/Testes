@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hackathon_2023/repository/user_id/user_id_repository_impl.dart';
-import 'package:flutter_hackathon_2023/service/user_id/user_id_service_impl.dart';
 import 'package:flutter_hackathon_2023/state/audio_post/upload_audio_post.dart';
 import 'package:flutter_hackathon_2023/state/post/posts.dart';
 import 'package:flutter_hackathon_2023/ui/hook/use_effect_once.dart';
@@ -22,7 +21,17 @@ class ConnectedRecordPage extends HookConsumerWidget {
     final uploadAudioPost = ref.watch(uploadAudioPostStateProvider);
     final posts = ref.watch(postsStateProvider);
     final userIdProvider = ref.watch(userIdRepositoryProvider);
+    final userId = useRef<int?>(0);
     final loading = useState(false);
+
+    // ignore: body_might_complete_normally_nullable
+    useEffectOnce(() {
+      Future.microtask(() async {
+        loading.value = true;
+        userId.value = await userIdProvider.get();
+        loading.value = false;
+      });
+    });
 
     uploadAudioPost.when(
       data: (v) {
@@ -69,7 +78,9 @@ class ConnectedRecordPage extends HookConsumerWidget {
         child: AppLoading(
           loading: loading.value,
           child: RecordPage(
-            profile: posts.value!.firstWhere((p0) => p0.name == userIdProvider.get()),
+            profile: posts.value?.firstWhere(
+              (p0) => p0.userId == userId.value,
+            ),
             onUploadPressed: (path) {
               if (path == null) {
                 return;
