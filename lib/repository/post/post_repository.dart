@@ -8,6 +8,7 @@ interface class PostRepository {
 
   Future<PostModel> create({
     required String name,
+    required int userId,
     required String imageUrl,
     required String audioUrl,
   }) {

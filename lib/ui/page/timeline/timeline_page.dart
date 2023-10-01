@@ -1,7 +1,9 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hackathon_2023/model/post.dart';
+import 'package:flutter_hackathon_2023/ui/page/timeline/timeline_category_carousel.dart';
 import 'package:flutter_hackathon_2023/ui/page/timeline/timeline_item.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class TimelinePage extends HookConsumerWidget {
@@ -14,6 +16,8 @@ class TimelinePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final uniquePosts = posts.where((post) => post.unique > 5).toBuiltList();
+
     return ShaderMask(
       shaderCallback: (Rect rect) {
         return const LinearGradient(
@@ -36,6 +40,11 @@ class TimelinePage extends HookConsumerWidget {
       blendMode: BlendMode.dstOut,
       child: CustomScrollView(
         slivers: [
+          const SliverGap(16),
+          TimelineCategoryCarouselSliverList(
+            headerTitle: 'ユニークスペシャル',
+            posts: uniquePosts,
+          ),
           SliverList(
             delegate: SliverChildListDelegate([
               for (final post in posts)
