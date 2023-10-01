@@ -4,6 +4,7 @@ import 'package:flutter_hackathon_2023/model/post.dart';
 import 'package:flutter_hackathon_2023/ui/hook/use_theme.dart';
 import 'package:flutter_hackathon_2023/ui/page/timeline/timeline_carousel_item.dart';
 import 'package:flutter_hackathon_2023/ui/theme/app_theme.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class TimelineCategoryCarouselSliverList extends HookConsumerWidget {
@@ -33,12 +34,13 @@ class TimelineCategoryCarouselSliverList extends HookConsumerWidget {
               ),
             ),
           ),
+          const Gap(8),
           SizedBox(
-            height: 140,
+            height: 204,
             child: ListView.builder(
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(4.0),
                   child: TimelineCarouselItem(
                     post: posts[index],
                   ),

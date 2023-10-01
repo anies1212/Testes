@@ -1,8 +1,11 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hackathon_2023/foundation/audio_player/audio_player.dart';
 import 'package:flutter_hackathon_2023/model/post.dart';
 import 'package:flutter_hackathon_2023/ui/page/timeline/timeline_category_carousel.dart';
 import 'package:flutter_hackathon_2023/ui/page/timeline/timeline_item.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -17,6 +20,10 @@ class TimelinePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final uniquePosts = posts.where((post) => post.unique > 5).toBuiltList();
+    final accuracyPosts =
+        posts.where((post) => post.accuracy > 5).toBuiltList();
+    final likeTestPosts =
+        posts.where((post) => post.likeTest > 5).toBuiltList();
 
     return ShaderMask(
       shaderCallback: (Rect rect) {
@@ -41,10 +48,21 @@ class TimelinePage extends HookConsumerWidget {
       child: CustomScrollView(
         slivers: [
           const SliverGap(16),
-          TimelineCategoryCarouselSliverList(
-            headerTitle: 'ユニークスペシャル',
-            posts: uniquePosts,
-          ),
+          if (uniquePosts.isNotEmpty)
+            TimelineCategoryCarouselSliverList(
+              headerTitle: 'ユニークスペシャル',
+              posts: uniquePosts,
+            ),
+          if (accuracyPosts.isNotEmpty)
+            TimelineCategoryCarouselSliverList(
+              headerTitle: '発音スペシャル',
+              posts: accuracyPosts,
+            ),
+          if (likeTestPosts.isNotEmpty)
+            TimelineCategoryCarouselSliverList(
+              headerTitle: 'テストっぽさスペシャル',
+              posts: likeTestPosts,
+            ),
           SliverList(
             delegate: SliverChildListDelegate([
               for (final post in posts)
