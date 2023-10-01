@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hackathon_2023/state/user/create_user_state.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class WelcomePage extends HookConsumerWidget {
@@ -11,10 +10,6 @@ class WelcomePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textEditingController = useTextEditingController();
-
-    ref.listen(createUserProvider.select((id) => id != null), (_, id) {
-      context.push('/timeline');
-    });
 
     return Center(
       child: Padding(

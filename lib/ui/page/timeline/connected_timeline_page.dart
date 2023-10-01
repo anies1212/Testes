@@ -4,6 +4,7 @@ import 'package:flutter_hackathon_2023/state/post/posts.dart';
 import 'package:flutter_hackathon_2023/ui/page/app_background_container.dart';
 import 'package:flutter_hackathon_2023/ui/page/record/connected_record_page.dart';
 import 'package:flutter_hackathon_2023/ui/page/timeline/timeline_page.dart';
+import 'package:flutter_hackathon_2023/ui/widget/loading/loading.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -35,8 +36,11 @@ class ConnectedTimelinePage extends HookConsumerWidget {
           Colors.orange,
           Colors.pink,
         ],
-        child: TimelinePage(
-          posts: posts.value ?? BuiltList(),
+        child: AppLoading(
+          loading: posts.value == null,
+          child: TimelinePage(
+            posts: posts.value ?? BuiltList(),
+          ),
         ),
       ),
     );

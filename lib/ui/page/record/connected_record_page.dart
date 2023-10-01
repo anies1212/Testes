@@ -3,6 +3,7 @@ import 'package:flutter_hackathon_2023/state/audio_post/upload_audio_post.dart';
 import 'package:flutter_hackathon_2023/ui/page/app_background_container.dart';
 import 'package:flutter_hackathon_2023/ui/page/record/record_page.dart';
 import 'package:flutter_hackathon_2023/ui/page/upload_completed/upload_completed_page.dart';
+import 'package:flutter_hackathon_2023/ui/widget/loading/loading.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -59,21 +60,18 @@ class ConnectedRecordPage extends HookConsumerWidget {
           Colors.purple,
           Colors.orange,
         ],
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            RecordPage(
-              onUploadPressed: (path) {
-                if (path == null) {
-                  return;
-                }
-                ref.read(uploadAudioPostStateProvider.notifier).upload(
-                      localFilePath: path,
-                    );
-              },
-            ),
-            if (loading.value) const CircularProgressIndicator()
-          ],
+        child: AppLoading(
+          loading: loading.value,
+          child: RecordPage(
+            onUploadPressed: (path) {
+              if (path == null) {
+                return;
+              }
+              ref.read(uploadAudioPostStateProvider.notifier).upload(
+                    localFilePath: path,
+                  );
+            },
+          ),
         ),
       ),
     );
