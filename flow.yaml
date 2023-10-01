@@ -4,3 +4,7 @@ appId: com.example.flutter_hackathon_2023
 - tapOn: "Your Name"
 - inputText: "Hello Maestro"
 - tapOn: "Start your Testing"
+- tapOn: "Add Post"
+- tapOn: "Record"
+- tapOn: "Record"
+- tapOn: "Upload"

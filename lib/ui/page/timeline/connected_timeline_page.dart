@@ -31,6 +31,7 @@ class ConnectedTimelinePage extends HookConsumerWidget {
           child: const Icon(
             Icons.add,
             color: Colors.white,
+            semanticLabel: "Add Post",
           ),
         ),
       ),
