@@ -25,8 +25,10 @@ Future<void> main() async {
   );
 
   runApp(
-    App(
-      userId: userId,
+    ProviderScope(
+      child: App(
+        userId: userId,
+      ),
     ),
   );
 }

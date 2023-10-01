@@ -6,7 +6,7 @@ final appThemeProvider = Provider<ThemeData>(
     return ThemeData(
       textTheme: const TextTheme(
         displayLarge: TextStyle(
-          fontSize: 48,
+          fontSize: 40,
           fontWeight: FontWeight.w600,
         ),
         displayMedium: TextStyle(
@@ -16,6 +16,10 @@ final appThemeProvider = Provider<ThemeData>(
         displaySmall: TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w200,
+        ),
+        bodyLarge: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.w400,
         ),
       ),
     );

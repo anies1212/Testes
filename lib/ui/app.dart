@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hackathon_2023/ui/router/go_router.dart';
+import 'package:flutter_hackathon_2023/ui/theme/app_theme.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class App extends HookConsumerWidget {
@@ -12,14 +13,12 @@ class App extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ProviderScope(
-      child: MaterialApp.router(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        routerConfig: createGoRouter(userId),
-      ),
+    final appTheme = ref.watch(appThemeProvider);
+
+    return MaterialApp.router(
+      title: 'Flutter Demo',
+      theme: appTheme,
+      routerConfig: createGoRouter(userId),
     );
   }
 }
