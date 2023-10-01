@@ -4,6 +4,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final appThemeProvider = Provider<ThemeData>(
   (ref) {
     return ThemeData(
+      colorScheme: const ColorScheme.light().copyWith(
+        primary: Colors.white,
+      ),
       textTheme: const TextTheme(
         displayLarge: TextStyle(
           fontSize: 40,
