@@ -80,3 +80,4 @@ flutter:
     - .env
     - assets/image/
     - assets/icon/
+    - assets/audio/

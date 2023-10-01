@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hackathon_2023/foundation/record/record_controller.dart';
 import 'package:flutter_hackathon_2023/model/post.dart';
@@ -37,6 +40,24 @@ class RecordPage extends HookConsumerWidget {
       duration: const Duration(milliseconds: 5000),
     );
     final progressState = useState<double>(0);
+
+    useEffect(() {
+      if (isRecording.value) {
+        final random = Random();
+        if (random.nextInt(10) < 7) {
+          return;
+        }
+
+        Future.microtask(() async {
+          try {
+            await Future.delayed(const Duration(seconds: 1));
+            final audioPlayer = AudioPlayer();
+            await audioPlayer.play(AssetSource('audio/howling.mp3'));
+          } catch (_) {}
+        });
+      }
+      return null;
+    }, [isRecording.value]);
 
     // ignore: body_might_complete_normally_nullable
     useEffectOnce(() {
