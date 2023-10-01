@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hackathon_2023/model/post.dart';
 import 'package:flutter_hackathon_2023/ui/page/record/connected_record_page.dart';
@@ -10,10 +9,9 @@ import 'package:go_router/go_router.dart';
 GoRouter createGoRouter(int? userId) {
   return GoRouter(
     // アプリが起動した時
-    initialLocation: UploadCompletedPage.routePath,
-    // initialLocation: userId == null
-    //     ? ConnectedWelcomePage.routePath
-    //     : ConnectedTimelinePage.routePath,
+    initialLocation: userId == null
+        ? ConnectedWelcomePage.routePath
+        : ConnectedTimelinePage.routePath,
     // パスと画面の組み合わせ
     routes: [
       GoRoute(
@@ -43,23 +41,15 @@ GoRouter createGoRouter(int? userId) {
       GoRoute(
         path: UploadCompletedPage.routePath,
         pageBuilder: (context, state) {
-          return const MaterialPage(
-            child: UploadCompletedPage(),
+          return MaterialPage(
+            child: UploadCompletedPage(
+              post: PostModel.fromJson(
+                state.extra as Map<String, dynamic>,
+              ),
+            ),
           );
         },
       ),
-      // GoRoute(
-      //   path: UploadCompletedPage.routePath,
-      //   pageBuilder: (context, state) {
-      //     return MaterialPage(
-      //       child: UploadCompletedPage(
-      //         post: PostModel.fromJson(
-      //           state.extra as Map<String, dynamic>,
-      //         ),
-      //       ),
-      //     );
-      //   },
-      // ),
     ],
     // 遷移ページがないなどのエラーが発生した時に、このページに行く
     errorPageBuilder: (context, state) => MaterialPage(
