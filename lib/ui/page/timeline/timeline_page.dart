@@ -18,14 +18,14 @@ class TimelinePage extends HookConsumerWidget {
       slivers: [
         SliverList(
           delegate: SliverChildListDelegate([
-            for (int i = 0; i < posts.length; i++)
+            for (final post in posts)
               Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 18,
                   horizontal: 24,
                 ),
                 child: TimelineItem(
-                  post: posts[i],
+                  post: post,
                 ),
               ),
           ]),

@@ -26,11 +26,6 @@ class ConnectedTimelinePage extends HookConsumerWidget {
           color: Colors.white,
         ),
       ),
-      appBar: AppBar(
-        backgroundColor: Colors.orange,
-        automaticallyImplyLeading: false,
-        elevation: 0,
-      ),
       body: AppBackgroundContainer(
         colors: const [
           Colors.orange,
@@ -38,8 +33,10 @@ class ConnectedTimelinePage extends HookConsumerWidget {
         ],
         child: AppLoading(
           loading: posts.value == null,
-          child: TimelinePage(
-            posts: posts.value ?? BuiltList(),
+          child: SafeArea(
+            child: TimelinePage(
+              posts: posts.value ?? BuiltList(),
+            ),
           ),
         ),
       ),
