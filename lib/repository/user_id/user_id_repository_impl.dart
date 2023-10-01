@@ -1,9 +1,5 @@
-import 'package:flutter_hackathon_2023/foundation/supabase/supabase_client.dart';
-import 'package:flutter_hackathon_2023/model/user.dart';
-import 'package:flutter_hackathon_2023/repository/user/user_repository.dart';
 import 'package:flutter_hackathon_2023/repository/user_id/user_id_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
 
 final userIdRepositoryProvider = riverpod.Provider<UserIdRepository>(

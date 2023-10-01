@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'dart:math';
 
 import 'package:audioplayers/audioplayers.dart';
@@ -15,9 +16,11 @@ import '../timeline/timeline_item.dart';
 class RecordPage extends HookConsumerWidget {
   const RecordPage({
     super.key,
+    required this.profile,
     required this.onUploadPressed,
   });
 
+  final PostModel profile;
   final ValueChanged<String?> onUploadPressed;
 
   @override
