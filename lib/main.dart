@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_hackathon_2023/foundation/supabase/setup.dart';
 import 'package:flutter_hackathon_2023/service/user_id/user_id_service_impl.dart';
@@ -14,6 +17,12 @@ Future<void> main() async {
 
   final userId =
       await ProviderContainer().read(userIdServiceProvider).getUserId();
+
+  unawaited(
+    SystemChrome.setPreferredOrientations(const [
+      DeviceOrientation.portraitUp,
+    ]),
+  );
 
   runApp(
     ProviderScope(

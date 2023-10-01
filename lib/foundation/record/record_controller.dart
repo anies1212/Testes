@@ -27,6 +27,17 @@ class RecordController extends ValueNotifier<RecordValue> {
     }
   }
 
+  Future<double> getAmplitude() async {
+    final amplitude = await record.getAmplitude();
+    final current = amplitude.max;
+    final isRecording = await _isRecording();
+    value = RecordValue(
+      isRecording: isRecording,
+      currentAmplitude: current,
+    );
+    return isRecording ? current : 0;
+  }
+
   Future<String?> stopRecording() async {
     final path = await record.stop();
     final isRecording = await _isRecording();
