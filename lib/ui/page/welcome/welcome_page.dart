@@ -55,9 +55,6 @@ class WelcomePage extends HookConsumerWidget {
                     border: OutlineInputBorder(),
                     labelText: 'Your Name',
                   ),
-                  onChanged: (value) {
-                    textEditingController.text = value;
-                  },
                   controller: textEditingController,
                   maxLength: 20,
                 ),

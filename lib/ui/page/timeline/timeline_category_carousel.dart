@@ -36,7 +36,7 @@ class TimelineCategoryCarouselSliverList extends HookConsumerWidget {
           ),
           const Gap(8),
           SizedBox(
-            height: 204,
+            height: 206,
             child: ListView.builder(
               itemBuilder: (context, index) {
                 return Padding(
