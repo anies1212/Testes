@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hackathon_2023/foundation/record/record_controller.dart';
@@ -15,9 +13,11 @@ import '../timeline/timeline_item.dart';
 class RecordPage extends HookConsumerWidget {
   const RecordPage({
     super.key,
+    required this.post,
     required this.onUploadPressed,
   });
 
+  final PostModel? post;
   final ValueChanged<String?> onUploadPressed;
 
   @override
@@ -42,24 +42,6 @@ class RecordPage extends HookConsumerWidget {
       duration: const Duration(milliseconds: 5000),
     );
     final progressState = useState<double>(0);
-
-    useEffect(() {
-      if (isRecording.value) {
-        final random = Random();
-        if (random.nextInt(10) < 7) {
-          return;
-        }
-
-        Future.microtask(() async {
-          try {
-            await Future.delayed(const Duration(seconds: 1));
-            final audioPlayer = AudioPlayer();
-            await audioPlayer.play(AssetSource('audio/howling.mp3'));
-          } catch (_) {}
-        });
-      }
-      return null;
-    }, [isRecording.value]);
 
     // ignore: body_might_complete_normally_nullable
     useEffectOnce(() {
@@ -87,7 +69,7 @@ class RecordPage extends HookConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TimelineItem(post: PostModel.defaultInstance),
+          TimelineItem(post: post),
           Expanded(
             child: Stack(
               alignment: Alignment.center,
@@ -139,6 +121,24 @@ class RecordPage extends HookConsumerWidget {
                       }
                     }
                   },
+                  onLongPressed: () async {
+                    try {
+                      if (isRecording.value) {
+                        isLocked.value = true;
+                        final path = await controller.stopRecording();
+                        animationController.stop();
+                        pathState.value = path;
+                      } else {
+                        if (!isLocked.value) {
+                          final audioPlayer = AudioPlayer();
+                          await audioPlayer
+                              .play(AssetSource('audio/howling.mp3'));
+                          await controller.startRecording();
+                          await animationController.forward();
+                        }
+                      }
+                    } catch (_) {}
+                  },
                   icon: Icon(
                     isRecording.value ? Icons.stop : Icons.mic,
                     size: 80,
@@ -171,26 +171,31 @@ class _RecordButton extends HookConsumerWidget {
     required this.isRecording,
     required this.isLocked,
     required this.onPressed,
+    required this.onLongPressed,
     required this.icon,
   });
 
   final ValueNotifier<bool> isRecording;
   final ValueNotifier<bool> isLocked;
   final VoidCallback onPressed;
+  final VoidCallback onLongPressed;
   final Icon icon;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: isLocked.value ? Colors.grey : Colors.pink,
-      ),
-      child: IconButton(
-        iconSize: 100,
-        alignment: Alignment.center,
-        onPressed: onPressed,
-        icon: icon,
+    return GestureDetector(
+      onLongPress: onLongPressed,
+      child: Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: isLocked.value ? Colors.grey : Colors.pink,
+        ),
+        child: IconButton(
+          iconSize: 100,
+          alignment: Alignment.center,
+          onPressed: onPressed,
+          icon: icon,
+        ),
       ),
     );
   }

@@ -12,6 +12,7 @@ class PostModel with _$PostModel {
 
   factory PostModel({
     @JsonKey(name: 'id') required int id,
+    @JsonKey(name: 'user_id') required int userId,
     @JsonKey(name: 'name') required String name,
     @JsonKey(name: 'title') required String title,
     @JsonKey(name: 'description') required String description,
@@ -29,6 +30,7 @@ class PostModel with _$PostModel {
 
   static final defaultInstance = PostModel(
     id: 0,
+    userId: 0,
     name: '',
     title: '',
     description: '',
