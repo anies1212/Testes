@@ -1,0 +1,6 @@
+appId: com.example.flutter_hackathon_2023
+---
+- launchApp
+- tapOn: "Your Name"
+- inputText: "Hello Maestro"
+- tapOn: "Start your Testing"

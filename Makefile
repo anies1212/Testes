@@ -22,3 +22,7 @@ build run:
 .PHONY: pub
 pub:
 	fvm flutter pub get
+
+.PHONY: maestro
+pub:
+	maestro test flow.yaml
