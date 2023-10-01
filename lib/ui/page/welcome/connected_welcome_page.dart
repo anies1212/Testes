@@ -34,7 +34,7 @@ class ConnectedWelcomePage extends HookConsumerWidget {
         loading.value = false;
 
         Future.microtask(() {
-          showSnackBar(context: context, text: 'エラーが発生しました。再度お試しください');
+          showSnackBar(context: context, text: e.toString());
         });
       },
       loading: () {
