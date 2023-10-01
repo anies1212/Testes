@@ -27,7 +27,7 @@ class ConnectedWelcomePage extends HookConsumerWidget {
 
         Future.microtask(() {
           showSnackBar(context: context, text: 'Welcome');
-          context.push('/timeline');
+          context.replace('/timeline');
         });
       },
       error: (e, s) {
