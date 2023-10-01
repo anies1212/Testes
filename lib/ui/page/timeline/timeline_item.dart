@@ -13,7 +13,7 @@ class TimelineItem extends HookConsumerWidget {
     required this.post,
   });
 
-  final PostModel post;
+  final PostModel? post;
 
   static const double _imageSquareWidth = 88;
 
@@ -22,7 +22,7 @@ class TimelineItem extends HookConsumerWidget {
     final loading = useState(false);
 
     final audioPlayer = useAudioPlayer();
-    final createdAt = post.createdAt;
+    final createdAt = post?.createdAt;
 
     useValueChanged<PlayerState, void>(audioPlayer.state, (_, __) {
       if (audioPlayer.state == PlayerState.completed) {
@@ -39,7 +39,9 @@ class TimelineItem extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${createdAt.year}.${createdAt.month}.${createdAt.day} ${createdAt.hour}:${createdAt.minute}',
+                post == null
+                    ? ''
+                    : '${createdAt!.year}.${createdAt.month}.${createdAt.day} ${createdAt.hour}:${createdAt.minute}',
                 style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w200,
@@ -48,7 +50,7 @@ class TimelineItem extends HookConsumerWidget {
               ),
               const Gap(4),
               Text(
-                post.title,
+                post == null ? '' : post!.title,
                 style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,
@@ -57,7 +59,7 @@ class TimelineItem extends HookConsumerWidget {
               ),
               const Gap(4),
               Text(
-                post.description,
+                post == null ? '' : post!.description,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
@@ -70,32 +72,34 @@ class TimelineItem extends HookConsumerWidget {
         GestureDetector(
           onTap: () async {
             loading.value = true;
-            await audioPlayer.play(UrlSource(post.audioUrl));
+            await audioPlayer
+                .play(UrlSource(post == null ? '' : post!.audioUrl));
             loading.value = false;
           },
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Container(
-                clipBehavior: Clip.antiAlias,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black26,
-                      spreadRadius: 2,
-                      blurRadius: 2,
-                      offset: Offset(3, 2),
-                    ),
-                  ],
+              if (post != null)
+                Container(
+                  clipBehavior: Clip.antiAlias,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        spreadRadius: 2,
+                        blurRadius: 2,
+                        offset: Offset(3, 2),
+                      ),
+                    ],
+                  ),
+                  width: _imageSquareWidth,
+                  height: _imageSquareWidth,
+                  child: Image.network(
+                    post!.jacketUrl,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-                width: _imageSquareWidth,
-                height: _imageSquareWidth,
-                child: Image.network(
-                  post.jacketUrl,
-                  fit: BoxFit.cover,
-                ),
-              ),
               Positioned.fill(
                 child: Container(
                   decoration: BoxDecoration(

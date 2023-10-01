@@ -9,6 +9,7 @@ import 'package:flutter_hackathon_2023/ui/page/upload_completed/upload_completed
 import 'package:flutter_hackathon_2023/ui/widget/loading/loading.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
+import 'package:collection/collection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ConnectedRecordPage extends HookConsumerWidget {
@@ -78,7 +79,7 @@ class ConnectedRecordPage extends HookConsumerWidget {
         child: AppLoading(
           loading: loading.value,
           child: RecordPage(
-            profile: posts.value?.firstWhere(
+            post: posts.value!.firstWhereOrNull(
               (p0) => p0.userId == userId.value,
             ),
             onUploadPressed: (path) {
