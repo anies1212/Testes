@@ -18,12 +18,20 @@ class ConnectedTimelinePage extends HookConsumerWidget {
     final posts = ref.watch(postsStateProvider);
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.orange,
-        onPressed: () => context.push(ConnectedRecordPage.routePath),
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: InkWell(
+        onTap: () => context.push(ConnectedRecordPage.routePath),
+        child: Container(
+          width: 60,
+          height: 60,
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+            color: Colors.orange,
+          ),
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
         ),
       ),
       body: AppBackgroundContainer(
@@ -34,8 +42,11 @@ class ConnectedTimelinePage extends HookConsumerWidget {
         child: AppLoading(
           loading: posts.value == null,
           child: SafeArea(
-            child: TimelinePage(
-              posts: posts.value ?? BuiltList(),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 48),
+              child: TimelinePage(
+                posts: posts.value ?? BuiltList(),
+              ),
             ),
           ),
         ),
