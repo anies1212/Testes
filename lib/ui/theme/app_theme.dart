@@ -5,6 +5,9 @@ final appThemeProvider = Provider<ThemeData>(
   (ref) {
     return ThemeData(
       primaryColor: Colors.orange,
+      colorScheme: const ColorScheme.light().copyWith(
+        primary: Colors.white,
+      ),
       textTheme: const TextTheme(
         displayLarge: TextStyle(
           fontSize: 40,
