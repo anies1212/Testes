@@ -3,8 +3,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_hackathon_2023/foundation/supabase/supabase_client.dart';
 import 'package:flutter_hackathon_2023/model/post.dart';
 import 'package:flutter_hackathon_2023/repository/post/post_repository.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 final postRepositoryProvider = riverpod.Provider<PostRepository>(
   (ref) => PostRepositoryImpl(ref.watch(supabaseClientProvider)),
@@ -35,6 +35,7 @@ class PostRepositoryImpl implements PostRepository {
   @override
   Future<PostModel> create({
     required String name,
+    required int userId,
     required String imageUrl,
     required String audioUrl,
   }) async {
@@ -44,6 +45,7 @@ class PostRepositoryImpl implements PostRepository {
       'create_post',
       body: {
         'name': name,
+        'user_id': userId,
         'image_url': imageUrl,
         'audio_url': audioUrl,
       },

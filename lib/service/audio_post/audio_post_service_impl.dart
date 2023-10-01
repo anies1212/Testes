@@ -49,6 +49,7 @@ class AudioPostServiceImpl implements AudioPostService {
       name: user.name,
       audioUrl: audioUrl,
       imageUrl: user.imageUrl,
+      userId: user.id,
     );
   }
 }
