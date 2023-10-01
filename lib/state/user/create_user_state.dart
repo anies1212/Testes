@@ -4,7 +4,7 @@ import 'package:flutter_hackathon_2023/state/state_notifier_async.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final createUserProvider =
-    StateNotifierProvider<CreateUserState, AsyncValue<int?>>(
+    StateNotifierProvider.autoDispose<CreateUserState, AsyncValue<int?>>(
   (ref) => CreateUserState(
     const AsyncValue.data(null),
     ref.watch(userServiceProvider),

@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hackathon_2023/model/post.dart';
 import 'package:flutter_hackathon_2023/ui/page/record/connected_record_page.dart';

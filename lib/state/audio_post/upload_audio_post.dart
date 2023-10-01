@@ -5,7 +5,7 @@ import 'package:flutter_hackathon_2023/state/state_notifier_async.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final uploadAudioPostStateProvider =
-    StateNotifierProvider<UploadAudioPostState, AsyncValue<PostModel?>>(
+    StateNotifierProvider.autoDispose<UploadAudioPostState, AsyncValue<PostModel?>>(
   (ref) => UploadAudioPostState(
     const AsyncValue.data(null),
     ref.watch(audioPostServiceProvider),
