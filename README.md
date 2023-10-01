@@ -1,8 +1,22 @@
-# flutter_hackathon_2023
+<div align="center">
+<img src="./assets/icon/ios_icon_1024.png" width="300">
+</div>
 
-We are Epoch
+# TesTes
+
+Ah, Ah, Testing... Testing...
 
 ## Getting Started
+
+```shell
+make setup
+
+// When you want to run build runner
+make build run
+
+// When you want to run pub get
+make pub
+```
 
 ## Architecture
 
@@ -16,13 +30,15 @@ We are Epoch
 
 UIの状態管理を担当する
 
-ユーザのアクションに基づいて状態を更新しUIに通知する
+ユーザのアクションに基づいて状態をAsyncValueで更新しUIに通知する
 
 ### Service
 
 ビジネスロジックを担当する
 
 Repositoryにデータを渡す際はここで加工する
+
+Serviceは複数Repositoryに依存可能
 
 ### Repository
 
