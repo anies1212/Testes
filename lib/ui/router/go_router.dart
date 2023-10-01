@@ -10,9 +10,10 @@ import 'package:go_router/go_router.dart';
 GoRouter createGoRouter(int? userId) {
   return GoRouter(
     // アプリが起動した時
-    initialLocation: userId == null
-        ? ConnectedWelcomePage.routePath
-        : ConnectedTimelinePage.routePath,
+    initialLocation: UploadCompletedPage.routePath,
+    // initialLocation: userId == null
+    //     ? ConnectedWelcomePage.routePath
+    //     : ConnectedTimelinePage.routePath,
     // パスと画面の組み合わせ
     routes: [
       GoRoute(
@@ -42,15 +43,23 @@ GoRouter createGoRouter(int? userId) {
       GoRoute(
         path: UploadCompletedPage.routePath,
         pageBuilder: (context, state) {
-          return MaterialPage(
-            child: UploadCompletedPage(
-              post: PostModel.fromJson(
-                state.extra as Map<String, dynamic>,
-              ),
-            ),
+          return const MaterialPage(
+            child: UploadCompletedPage(),
           );
         },
       ),
+      // GoRoute(
+      //   path: UploadCompletedPage.routePath,
+      //   pageBuilder: (context, state) {
+      //     return MaterialPage(
+      //       child: UploadCompletedPage(
+      //         post: PostModel.fromJson(
+      //           state.extra as Map<String, dynamic>,
+      //         ),
+      //       ),
+      //     );
+      //   },
+      // ),
     ],
     // 遷移ページがないなどのエラーが発生した時に、このページに行く
     errorPageBuilder: (context, state) => MaterialPage(

@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final appThemeProvider = Provider<ThemeData>(
   (ref) {
     return ThemeData(
+      primaryColor: Colors.orange,
       textTheme: const TextTheme(
         displayLarge: TextStyle(
           fontSize: 40,
@@ -21,7 +22,19 @@ final appThemeProvider = Provider<ThemeData>(
           fontSize: 24,
           fontWeight: FontWeight.w400,
         ),
+        bodyMedium: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w400,
+        ),
+        bodySmall: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+        ),
       ),
     );
   },
 );
+
+extension TextStyleExt on TextStyle {
+  TextStyle get bold => copyWith(fontWeight: FontWeight.bold);
+}

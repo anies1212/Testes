@@ -28,7 +28,7 @@ class ConnectedRecordPage extends HookConsumerWidget {
               () => ScaffoldMessenger.of(context).showSnackBar(snackBar));
 
           Future.microtask(() {
-            context.push(
+            context.replace(
               UploadCompletedPage.routePath,
               extra: v.toJson(),
             );

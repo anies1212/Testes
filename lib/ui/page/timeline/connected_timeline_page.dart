@@ -1,9 +1,11 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hackathon_2023/state/post/posts.dart';
+import 'package:flutter_hackathon_2023/ui/hook/use_theme.dart';
 import 'package:flutter_hackathon_2023/ui/page/app_background_container.dart';
 import 'package:flutter_hackathon_2023/ui/page/record/connected_record_page.dart';
 import 'package:flutter_hackathon_2023/ui/page/timeline/timeline_page.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
